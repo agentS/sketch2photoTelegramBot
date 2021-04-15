@@ -1,4 +1,5 @@
-from help_commands import show_help, show_start, say_hello
+from bot_commands.help_commands import show_help, show_start, say_hello
+from bot_commands.translation_commands import start_translate_sketch_to_photo, start_translate_photo_to_sketch
 
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
@@ -17,6 +18,8 @@ if __name__ == '__main__':
     updater.dispatcher.add_handler(CommandHandler('start', show_start))
     updater.dispatcher.add_handler(CommandHandler('help', show_help))
     updater.dispatcher.add_handler(CommandHandler('hello', say_hello))
+    updater.dispatcher.add_handler(CommandHandler('sketch2photo', start_translate_sketch_to_photo))
+    updater.dispatcher.add_handler(CommandHandler('photo2sketch', start_translate_photo_to_sketch))
 
     updater.start_polling()
     updater.idle()
