@@ -1,4 +1,5 @@
 from bot_commands.conversation_states import BotConversationStates
+from bot_commands.utilities import send_typing_indicator
 
 from telegram import Update
 from telegram.ext import CallbackContext
@@ -11,6 +12,7 @@ def start_translate_sketch_to_photo(update: Update, context: CallbackContext) ->
     update.message.reply_text('Okay, I am generating a photo from your sketch. Please send me the sketch. Also, please note that I will resize the sketch into a 256x256 RGB file. If you want to cancel this action, just send the command /cancel.')
     return BotConversationStates.RECEIVE_SKETCH
 
+@send_typing_indicator
 def receive_and_translate_sketch(update: Update, context: CallbackContext) -> BotConversationStates:
     update.message.reply_text('Nice, I am now generating a photo from the sketch you sent me.')
     photo_byte_array = load_image_from_message(update)
